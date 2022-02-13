@@ -21,7 +21,8 @@ public class RandomWalk {
      */
     private void move(int dx, int dy) {
         // FIXME do move by replacing the following code
-         throw new RuntimeException("Not implemented");
+         this.x += dx;
+         this.y += dy;
         // END 
     }
 
@@ -32,6 +33,10 @@ public class RandomWalk {
      */
     private void randomWalk(int m) {
         // FIXME
+        for(int i=0;i<m;i++)
+        {
+            randomMove();
+        }
         // END 
     }
 
@@ -52,8 +57,9 @@ public class RandomWalk {
      */
     public double distance() {
         // FIXME
+        double dist = Math.sqrt(x*x+y*y);
         // END
-        return 0;
+        return dist;
     }
 
     /**
@@ -74,13 +80,13 @@ public class RandomWalk {
     }
 
     public static void main(String[] args) {
-        if (args.length == 0)
-            throw new RuntimeException("Syntax: RandomWalk steps [experiments]");
-        int m = Integer.parseInt(args[0]);
-        int n = 30;
-        if (args.length > 1) n = Integer.parseInt(args[1]);
-        double meanDistance = randomWalkMulti(m, n);
-        System.out.println(m + " steps: " + meanDistance + " over " + n + " experiments");
+        int [] arr = {5,16,89,120,400,1000};
+        int n = 10;
+        for(int i=0;i<arr.length;i++)
+        {
+            double meanDistance = randomWalkMulti(arr[i], n);
+            System.out.println(arr[i] + " steps: " + meanDistance + " over " + n + " experiments");
+        }
     }
 
 }

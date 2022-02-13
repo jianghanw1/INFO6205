@@ -4,6 +4,11 @@
 
 package edu.neu.coe.info6205.util;
 
+import edu.neu.coe.info6205.sort.elementary.InsertionSort;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -125,4 +130,50 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
     private final Consumer<T> fPost;
 
     final static LazyLogger logger = new LazyLogger(Benchmark_Timer.class);
+
+    public static void main(String[] args) {
+        InsertionSort ob1 = new InsertionSort();
+        for (int size = 5; size < 10000; size += 1000) {
+            int n = size;
+            Supplier<Integer[]> ordered_sup = new Supplier<Integer[]>() {
+                @Override
+                public Integer[] get() {
+                    Integer[] array = new Integer[n];
+                    for (int i = 0; i < n; i++) {
+                        array[i] = i;
+                    }
+                    ob1.sort(array, 0, array.length);
+                    return array;
+                }
+            };
+            Supplier<Integer[]> supplier = new Supplier<Integer[]>() {
+                @Override
+                public Integer[] get() {
+                    Random random = new Random();
+                    Integer[] array = new Integer[n];
+                    for (int i = 0; i < n; i++) {
+                        array[i] = random.nextInt(n);
+                        //System.out.println(array[i]);
+                    }
+                    ob1.sort(array, 0, array.length);
+                    return array;
+                }
+            };
+            Consumer con = new Consumer() {
+                @Override
+                public void accept(Object o) {
+                    ob1.sort((Comparable[]) o,0,supplier.get().length);
+                }
+            };
+            Benchmark_Timer timer = new Benchmark_Timer("",con);
+            double rdTime = timer.runFromSupplier(supplier, 20);
+            double orderTime = timer.runFromSupplier(ordered_sup,20);
+            System.out.println("This is the running time of sorting random array: "+rdTime);
+            System.out.println("This is the running time of sorting ordered array: "+orderTime);
+        }
+    }
+
+
+
+
 }

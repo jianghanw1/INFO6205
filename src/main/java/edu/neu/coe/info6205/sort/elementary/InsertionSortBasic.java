@@ -1,6 +1,9 @@
 package edu.neu.coe.info6205.sort.elementary;
 
+import edu.neu.coe.info6205.sort.Helper;
+
 import java.util.Arrays;
+
 
 /**
  * This is a basic implementation of insertion sort.
@@ -18,8 +21,10 @@ public class InsertionSortBasic {
 
     private void swap(int i, Object[] a) {
         // FIXME
-        // END 
+
+        // END
     }
+
 
     private void swap(Object[] a, int j, int i) {
         Object temp = a[j];
