@@ -7,9 +7,14 @@ public class UF_Client {
 
     public static void main(String[] args){
         Scanner in = new Scanner(System.in);
+        int sum = 0;
         System.out.println("Please enter a number: ");
         int n = in.nextInt();
-        System.out.println("The number of connections are: "+count(n));
+        for(int i=0;i<50;i++)
+        {
+            sum = sum + count(n);
+        }
+        System.out.println("The number of connections are: "+sum/50);
     }
     public static int count(int n)
     {
