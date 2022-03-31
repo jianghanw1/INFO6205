@@ -24,7 +24,7 @@ public class Main {
         ArrayList<Long> timeList = new ArrayList<>();
         System.out.println("Input array size: "+array.length);
         for (int j = 1; j < 11; j++) {
-            ParSort.cutoff = 100000*j;
+            ParSort.cutoff = 100000*j;//ParSort.cutoff = array.length/10 for first approach
             ParSort.myPool = new ForkJoinPool((int)Math.pow(2,j));
             // for (int i = 0; i < array.length; i++) array[i] = random.nextInt(10000000);
             long time;
